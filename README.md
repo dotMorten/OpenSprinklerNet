@@ -3,10 +3,13 @@ OpenSprinklerNet
 
 .NET Library for querying and controlling your '[OpenSprinkler](http://www.opensprinkler.com/)' sprinkler controller.
 
+Supports .NET 4.5, Windows 8.1 and Windows Phone 8.1.
+
 ![opensprinkler](opensprinkler_v20s.jpg) 
 
 
-Sample code:
+###Sample code:
+
 ```csharp
 //Open connection
 var conn = await OpenSprinklerConnection.OpenAsync("http://192.168.1.99:80", "mypassword");
