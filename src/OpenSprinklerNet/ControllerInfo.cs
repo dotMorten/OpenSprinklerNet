@@ -133,5 +133,10 @@ namespace OpenSprinklerNet
 		/// </summary>
 		[DataMember(Name = "ipos")]
 		public Status IgnorePassword { get; private set; }
+		/// <summary>
+		/// Use sequential mode
+		/// </summary>
+		[DataMember(Name = "seq")]
+		public Status SequentialMode { get; private set; }
 	}
 }
