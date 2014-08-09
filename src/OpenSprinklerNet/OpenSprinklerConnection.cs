@@ -20,6 +20,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Web.Http;
+using Windows.Web.Http.Filters;
 
 namespace OpenSprinklerNet
 {
@@ -27,16 +28,37 @@ namespace OpenSprinklerNet
     {
 		private string m_hostname;
 		private string m_password;
+		private IHttpFilter m_httpFilter;
 
-		private OpenSprinklerConnection(string hostname, string password)
+		//Used for testing only
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		public OpenSprinklerConnection(string hostname, string password, IHttpFilter httpFilter)
 		{
 			m_hostname = hostname;
 			m_password = Convert.ToBase64String(Encoding.UTF8.GetBytes(password));
+			m_httpFilter = httpFilter;
 		}
 
-		public static async Task<OpenSprinklerConnection> OpenAsync(string hostname, string password = null)
+		/// <summary>
+		/// Creates connection.
+		/// </summary>
+		/// <param name="hostname">Hostname or IP address including http://</param>
+		/// <param name="password">password if required</param>
+		public static Task<OpenSprinklerConnection> OpenAsync(string hostname, string password = null)
 		{
-			OpenSprinklerConnection conn = new OpenSprinklerConnection(hostname, password);
+			return OpenAsync(hostname, password, null);
+		}
+
+		/// <summary>
+		/// Creates connection using a custom filter (mainly used for unit testing)
+		/// </summary>
+		/// <param name="hostname">Hostname or IP address including http://</param>
+		/// <param name="password">password if required</param>
+		/// <param name="httpFilter">custom filter (mainly used for unit testing)</param>
+		/// <returns>OpenSprinkler connection</returns>
+		public static async Task<OpenSprinklerConnection> OpenAsync(string hostname, string password, IHttpFilter httpFilter)
+		{
+			OpenSprinklerConnection conn = new OpenSprinklerConnection(hostname, password, httpFilter ?? new Windows.Web.Http.Filters.HttpBaseProtocolFilter());
 			await conn.GetControllerInfoAsync().ConfigureAwait(false); //Test connection
 			return conn;
 		}
@@ -100,7 +122,7 @@ namespace OpenSprinklerNet
 
 		private async Task<HttpResponseMessage> GetHttpContentAsync(string query, bool requiresAuth = false)
 		{
-			HttpClient client = new HttpClient();
+			HttpClient client = new HttpClient(m_httpFilter);
 			string url = m_hostname + "/" + query;
 			if (requiresAuth)
 			{
@@ -110,6 +132,7 @@ namespace OpenSprinklerNet
 				//	client.DefaultRequestHeaders.Authorization = new Windows.Web.Http.Headers.HttpCredentialsHeaderValue("Basic", m_password);
 				//}
 			}
+			//Add timestamp to prevent http caching
 			url = AppendParameter(url, "_t", DateTime.Now.Ticks.ToString());
 			Uri uri = new Uri(url);
 			var result = await client.GetAsync(uri).AsTask().ConfigureAwait(false);

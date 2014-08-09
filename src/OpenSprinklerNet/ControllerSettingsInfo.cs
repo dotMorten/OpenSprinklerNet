@@ -14,6 +14,7 @@
 // limitations under the License.
 //
 
+using System;
 using System.Runtime.Serialization;
 
 namespace OpenSprinklerNet
@@ -35,5 +36,16 @@ namespace OpenSprinklerNet
 		public int NumberOfBoards { get; set; }
 		[DataMember(Name = "mm")]
 		public Status ManualMode { get; set; }
+
+		[DataMember(Name = "devt")]
+		private long _DateInternal { get; set; }
+
+		public DateTime Date
+		{
+			get
+			{
+				return new DateTime(1970, 1, 1).AddSeconds(_DateInternal);
+			}
+		}
 	}
 }

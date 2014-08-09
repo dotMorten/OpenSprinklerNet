@@ -85,6 +85,9 @@ namespace OpenSprinklerNet
 		private double _TimeZoneInternal { get; set; }
 		public double TimeZone { get { return _TimeZoneInternal / 4 - 12; } }
 
+		/// <summary>
+		/// Whether to user network time sync
+		/// </summary>
 		[DataMember(Name = "ntp")]
 		public Status NtpSync { get; private set; }
 		/// <summary>
