@@ -102,8 +102,8 @@ namespace OpenSprinklerNet
 						SkipDays = OpenSprinklerNet.SkipDays.Even;
 				}
 			}
-			Start = TimeSpan.FromSeconds(data[3]);
-			End = TimeSpan.FromSeconds(data[4]);
+			Start = TimeSpan.FromMinutes(data[3]);
+			End = TimeSpan.FromMinutes(data[4]);
 			Interval = TimeSpan.FromSeconds(data[5]);
 			Duration = TimeSpan.FromSeconds(data[6]);
 			List<bool> stations = new List<bool>();
