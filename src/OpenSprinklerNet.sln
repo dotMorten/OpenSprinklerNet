@@ -5,11 +5,12 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenSprinklerApp", "OpenSprinklerApp", "{6CED90C2-5CB5-43FD-A855-021ED0DD5D3B}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OpenSprinklerApp.Shared", "..\..\..\..\users\mort5161\documents\visual studio 2013\Projects\OpenSprinklerApp\OpenSprinklerApp\OpenSprinklerApp.Shared\OpenSprinklerApp.Shared.shproj", "{7C3A66A1-9ED7-4B51-A10B-4BF9697FF7C4}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OpenSprinklerApp.Shared", "OpenSprinklerApp\OpenSprinklerApp.Sha
+red\OpenSprinklerApp.Shared.shproj", "{7C3A66A1-9ED7-4B51-A10B-4BF9697FF7C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSprinklerApp.Windows", "..\..\..\..\users\mort5161\documents\visual studio 2013\Projects\OpenSprinklerApp\OpenSprinklerApp\OpenSprinklerApp.Windows\OpenSprinklerApp.Windows.csproj", "{A1B482E0-1582-4939-986E-AF6BF42CFCC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSprinklerApp.Windows", "OpenSprinklerApp\OpenSprinklerApp.Windows\OpenSprinklerApp.Windows.csproj", "{A1B482E0-1582-4939-986E-AF6BF42CFCC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSprinklerApp.WindowsPhone", "..\..\..\..\users\mort5161\documents\visual studio 2013\Projects\OpenSprinklerApp\OpenSprinklerApp\OpenSprinklerApp.WindowsPhone\OpenSprinklerApp.WindowsPhone.csproj", "{A045AF28-298E-4179-9B18-06D24202A1F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSprinklerApp.WindowsPhone", "OpenSprinklerApp\OpenSprinklerApp.WindowsPhone\OpenSprinklerApp.WindowsPhone.csproj", "{A045AF28-298E-4179-9B18-06D24202A1F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSprinklerNet", "OpenSprinklerNet\OpenSprinklerNet.csproj", "{9EAC58F7-EAFC-49D3-B5E8-AA8F407D4019}"
 EndProject
@@ -27,10 +28,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSprinklerNet.Tests.Wind
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\..\..\..\Users\mort5161\Documents\Visual Studio 2013\Projects\OpenSprinklerApp\OpenSprinklerApp\OpenSprinklerApp.Shared\OpenSprinklerApp.Shared.projitems*{a045af28-298e-4179-9b18-06d24202a1f4}*SharedItemsImports = 4
-		..\..\..\..\Users\mort5161\Documents\Visual Studio 2013\Projects\OpenSprinklerApp\OpenSprinklerApp\OpenSprinklerApp.Shared\OpenSprinklerApp.Shared.projitems*{7c3a66a1-9ed7-4b51-a10b-4bf9697ff7c4}*SharedItemsImports = 13
+		OpenSprinklerApp\OpenSprinklerApp.Shared\OpenSprinklerApp.Shared.projitems*{a045af28-298e-4179-9b18-06d24202a1f4}*SharedItemsImports = 4
+		OpenSprinklerApp\OpenSprinklerApp.Shared\OpenSprinklerApp.Shared.projitems*{7c3a66a1-9ed7-4b51-a10b-4bf9697ff7c4}*SharedItemsImports = 13
 		Tests\OpenSprinklerNet.Tests.Shared\OpenSprinklerNet.Tests.Shared.projitems*{115b3e59-013b-4f47-b0cd-c5696cfa95a8}*SharedItemsImports = 4
-		..\..\..\..\Users\mort5161\Documents\Visual Studio 2013\Projects\OpenSprinklerApp\OpenSprinklerApp\OpenSprinklerApp.Shared\OpenSprinklerApp.Shared.projitems*{a1b482e0-1582-4939-986e-af6bf42cfcc8}*SharedItemsImports = 4
+		OpenSprinklerApp\OpenSprinklerApp.Shared\OpenSprinklerApp.Shared.projitems*{a1b482e0-1582-4939-986e-af6bf42cfcc8}*SharedItemsImports = 4
 		Tests\OpenSprinklerNet.Tests.Shared\OpenSprinklerNet.Tests.Shared.projitems*{870312d0-f7f4-4679-a87c-5a39dd679f01}*SharedItemsImports = 13
 		Tests\OpenSprinklerNet.Tests.Shared\OpenSprinklerNet.Tests.Shared.projitems*{6b50dff0-fd2c-4524-a23d-f17d1b051d5a}*SharedItemsImports = 4
 		Tests\OpenSprinklerNet.Tests.Shared\OpenSprinklerNet.Tests.Shared.projitems*{8fa89a4c-dba9-4684-b66a-2cdc8efed9f1}*SharedItemsImports = 4

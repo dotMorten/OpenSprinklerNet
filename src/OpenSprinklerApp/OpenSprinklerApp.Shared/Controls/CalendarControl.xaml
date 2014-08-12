@@ -1,0 +1,241 @@
+﻿<UserControl
+    x:Class="OpenSprinklerApp.CalendarControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OpenSprinklerApp"
+	xmlns:conv="using:OpenSprinklerApp.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="500"
+    d:DesignWidth="800">
+	<UserControl.Resources>
+		<Style TargetType="TextBlock" x:Key="DayStyle" BasedOn="{StaticResource CaptionTextBlockStyle}">
+			<Setter Property="Foreground" Value="Gray" />
+			<Setter Property="Margin" Value="10,0,0,5" />
+			<Setter Property="FontSize" Value="16" />
+		</Style>
+		<conv:DateConverter x:Key="dateConv" />
+		<Style TargetType="ItemsControl" x:Key="calendarItems">
+			<Setter Property="Margin" Value="0,1,0,0" />
+			<Setter Property="Grid.RowSpan" Value="24" />
+			<Setter Property="ItemsPanel">
+				<Setter.Value>
+					<ItemsPanelTemplate>
+						<local:CalendarDayPanel Grid.Column="1" Grid.RowSpan="24" />
+					</ItemsPanelTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="ItemTemplate">
+				<Setter.Value>
+					<DataTemplate>
+						<local:CalendarItem
+								local:CalendarDayPanel.StartTime="{Binding Start}"
+								local:CalendarDayPanel.Duration="{Binding Duration}"
+								Color="{Binding Color}"
+								Title="{Binding Title}"
+								/>
+					</DataTemplate>
+				</Setter.Value>
+			</Setter>
+	
+		</Style>
+		<SolidColorBrush Color="White" x:Key="GridLineColor" />
+	</UserControl.Resources>
+    
+    <Grid Background="#E8E7EA">
+
+		<FlipView x:Name="flipview" SelectionChanged="flipview_SelectionChanged"
+				  >
+			<FlipView.ItemTemplate>
+				<DataTemplate>
+
+
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="40" />
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+			
+					<TextBlock Text="{Binding MonthName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" Grid.ColumnSpan="7"
+							   Padding="0,0,0,10" Margin="78,58,0,20"
+							   />
+
+					<TextBlock Text="{Binding Days[0].Day, Converter={StaticResource dateConv}, ConverterParameter='ddd, MMM d'}" Grid.Column="1" Grid.Row="1" Style="{StaticResource DayStyle}" />
+					<TextBlock Text="{Binding Days[1].Day, Converter={StaticResource dateConv}, ConverterParameter='ddd, MMM d'}" Grid.Column="2" Grid.Row="1" Style="{StaticResource DayStyle}" />
+					<TextBlock Text="{Binding Days[2].Day, Converter={StaticResource dateConv}, ConverterParameter='ddd, MMM d'}" Grid.Column="3" Grid.Row="1" Style="{StaticResource DayStyle}" />
+					<TextBlock Text="{Binding Days[3].Day, Converter={StaticResource dateConv}, ConverterParameter='ddd, MMM d'}" Grid.Column="4" Grid.Row="1" Style="{StaticResource DayStyle}" />
+					<TextBlock Text="{Binding Days[4].Day, Converter={StaticResource dateConv}, ConverterParameter='ddd, MMM d'}" Grid.Column="5" Grid.Row="1" Style="{StaticResource DayStyle}" />
+					<TextBlock Text="{Binding Days[5].Day, Converter={StaticResource dateConv}, ConverterParameter='ddd, MMM d'}" Grid.Column="6" Grid.Row="1" Style="{StaticResource DayStyle}" />
+					<TextBlock Text="{Binding Days[6].Day, Converter={StaticResource dateConv}, ConverterParameter='ddd, MMM d'}" Grid.Column="7" Grid.Row="1" Style="{StaticResource DayStyle}" />
+					<Border Width="1" Grid.Column="1" Grid.Row="1" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+					<Border Width="1" Grid.Column="2" Grid.Row="1" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+					<Border Width="1" Grid.Column="3" Grid.Row="1" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+					<Border Width="1" Grid.Column="4" Grid.Row="1" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+					<Border Width="1" Grid.Column="5" Grid.Row="1" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+					<Border Width="1" Grid.Column="6" Grid.Row="1" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+					<Border Width="1" Grid.Column="7" Grid.Row="1" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+
+					<ScrollViewer Grid.Row="2" Grid.ColumnSpan="8"
+											  HorizontalScrollMode="Disabled"
+											  ZoomMode="Disabled"
+											  >
+						<Grid MinHeight="{Binding Value, ElementName=slider}" x:Name="daysGrid" >
+						<Grid.Resources>
+							<Style TargetType="TextBlock">
+								<Setter Property="Foreground" Value="Gray" />
+								<Setter Property="Margin" Value="0" />
+								<Setter Property="FontSize" Value="14" />
+								<Setter Property="Padding" Value="0" />
+								<Setter Property="VerticalAlignment" Value="Center" />
+								<Setter Property="HorizontalAlignment" Value="Center" />
+							</Style>
+						</Grid.Resources>
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="40" />
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+				
+						<TextBlock Grid.Row="0" Text="12am" />
+						<TextBlock Grid.Row="1" Text="1" />
+						<TextBlock Grid.Row="2" Text="2" />
+						<TextBlock Grid.Row="3" Text="3" />
+						<TextBlock Grid.Row="4" Text="4" />
+						<TextBlock Grid.Row="5" Text="5" />
+						<TextBlock Grid.Row="6" Text="6" />
+						<TextBlock Grid.Row="7" Text="7" />
+						<TextBlock Grid.Row="8" Text="8" />
+						<TextBlock Grid.Row="9" Text="9" />
+						<TextBlock Grid.Row="10" Text="10" />
+						<TextBlock Grid.Row="11" Text="11" />
+						<TextBlock Grid.Row="12" Text="12 pm" />
+						<TextBlock Grid.Row="13" Text="1" />
+						<TextBlock Grid.Row="14" Text="2" />
+						<TextBlock Grid.Row="15" Text="3" />
+						<TextBlock Grid.Row="16" Text="4" />
+						<TextBlock Grid.Row="17" Text="5" />
+						<TextBlock Grid.Row="18" Text="6" />
+						<TextBlock Grid.Row="19" Text="7" />
+						<TextBlock Grid.Row="20" Text="8" />
+						<TextBlock Grid.Row="21" Text="9" />
+						<TextBlock Grid.Row="22" Text="10" />
+						<TextBlock Grid.Row="23" Text="11" />
+
+						<Border Height="1" Grid.Row="1"  Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="2"  Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="3"  Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="4"  Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="5"  Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="6"  Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="7"  Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="8"  Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="9"  Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="10" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="11" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="12" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="13" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="14" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="15" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="16" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="17" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="18" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="19" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="20" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="21" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="22" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+								<Border Height="1" Grid.Row="23" Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+
+
+						<ItemsControl Grid.Column="1" 
+							  Style="{StaticResource calendarItems}"
+								  ItemsSource="{Binding Days[0].Entries}" />
+						<ItemsControl Grid.Column="2" 
+							  Style="{StaticResource calendarItems}"
+								  ItemsSource="{Binding Days[1].Entries}" />
+						<ItemsControl Grid.Column="3" 
+							  Style="{StaticResource calendarItems}"
+								  ItemsSource="{Binding Days[2].Entries}" />
+						<ItemsControl Grid.Column="4" 
+							  Style="{StaticResource calendarItems}"
+								  ItemsSource="{Binding Days[3].Entries}" />
+						<ItemsControl Grid.Column="5" 
+							  Style="{StaticResource calendarItems}"
+								  ItemsSource="{Binding Days[4].Entries}" />
+						<ItemsControl Grid.Column="6" 
+							  Style="{StaticResource calendarItems}"
+								  ItemsSource="{Binding Days[5].Entries}" />
+						<ItemsControl Grid.Column="7" 
+							  Style="{StaticResource calendarItems}"
+								  ItemsSource="{Binding Days[6].Entries}" />
+				
+						<!--Top grid line-->
+						<Border Height="1" Grid.Row="0"  Grid.ColumnSpan="8" Background="{StaticResource GridLineColor}" VerticalAlignment="Top" />
+
+						<!--Vertical column grid lines-->
+						<Border Width="1" Grid.Column="1" Grid.RowSpan="24" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+						<Border Width="1" Grid.Column="2" Grid.RowSpan="24" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+						<Border Width="1" Grid.Column="3" Grid.RowSpan="24" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+						<Border Width="1" Grid.Column="4" Grid.RowSpan="24" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+						<Border Width="1" Grid.Column="5" Grid.RowSpan="24" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+						<Border Width="1" Grid.Column="6" Grid.RowSpan="24" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+						<Border Width="1" Grid.Column="7" Grid.RowSpan="24" Background="{StaticResource GridLineColor}" HorizontalAlignment="Left" />
+
+
+					</Grid>
+						</ScrollViewer>
+					</Grid>
+
+				</DataTemplate>
+			</FlipView.ItemTemplate>
+		</FlipView>
+		
+		<Slider HorizontalAlignment="Right"
+				VerticalAlignment="Top" Width="200"
+				Margin="20" x:Name="slider"
+				Minimum="800" Maximum="5000" Value="2500"/>
+	</Grid>
+</UserControl>

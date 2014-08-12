@@ -1,0 +1,43 @@
+﻿<Page
+    x:Name="pageRoot"
+    x:Class="OpenSprinklerApp.Views.ProgramsCalendarPage"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OpenSprinklerApp"
+	xmlns:vm="using:OpenSprinklerApp.ViewModels"
+    xmlns:common="using:OpenSprinklerApp.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+	<Page.Resources>
+		<vm:ProgramsCalendarVM x:Key="vm" />
+	</Page.Resources>
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+		  DataContext="{StaticResource vm}"
+		  >
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid>
+			<local:CalendarControl 
+				Grid.ColumnSpan="2" Grid.RowSpan="2"
+				Programs="{Binding Programs}"
+				IsSequential="{Binding IsSequential}" />
+
+			<Button x:Name="backButton" Margin="39,59,39,0" 
+					
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        VerticalAlignment="Top"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button" Click="backButton_Click"/>
+
+		</Grid>
+    </Grid>
+</Page>

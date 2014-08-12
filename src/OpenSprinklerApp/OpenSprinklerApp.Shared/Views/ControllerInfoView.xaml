@@ -1,0 +1,37 @@
+﻿<UserControl
+    x:Class="OpenSprinklerApp.ControllerInfoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OpenSprinklerApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Background="Red"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+	<Grid Background="{Binding Background, Source={RelativeSource Mode=TemplatedParent}}">
+		<StackPanel>
+			<local:KeyValuePairControl Header="Firmware version: " Content="{Binding FirmwareVersion}" />
+			<local:KeyValuePairControl Header="Number of Extension Boards:" Content="{Binding NumberOfExtensionBoards}" />
+			<local:KeyValuePairControl Header="Use DHCP:" Content="{Binding Dhcp}" />
+			<local:KeyValuePairControl Header="Host name:" Content="{Binding Endpoint.DisplayName}" />
+			<local:KeyValuePairControl Header="Port:" Content="{Binding HostPort}" />
+			<local:KeyValuePairControl Header="Time zone:" Content="{Binding TimeZone}" />
+			<local:KeyValuePairControl Header="NTP Endpoint:" Content="{Binding NtpEndpoint.DisplayName}" />
+			<local:KeyValuePairControl Header="Network Time Sync:" Content="{Binding NtpSync}" />
+			<local:KeyValuePairControl Header="Station Delay Time:" Content="{Binding StationDelayTime}" />
+			<local:KeyValuePairControl Header="MasterStation index:" Content="{Binding MasterStationIndex}" />
+			<local:KeyValuePairControl Header="Master on delay time:" Content="{Binding MasterOnDelayTime}" />
+			<local:KeyValuePairControl Header="Master off delay time:" Content="{Binding MasterOffDelayTime}" />
+			<local:KeyValuePairControl Header="Use rain sensor:" Content="{Binding UseRainSensor}" />
+			<local:KeyValuePairControl Header="Rain sensor normally open:" >
+				<ToggleSwitch IsOn="{Binding RainSensorNormallyOpen}" />
+			</local:KeyValuePairControl>
+			<local:KeyValuePairControl Header="Water level scaling:" Content="{Binding WaterLevel}" />
+			<local:KeyValuePairControl Header="Ignore password:" Content="{Binding IgnorePassword}" />
+			<local:KeyValuePairControl Header="Sequential mode:" Content="{Binding SequentialMode}" />
+		</StackPanel>
+
+    </Grid>
+</UserControl>
