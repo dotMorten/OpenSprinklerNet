@@ -24,6 +24,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\KeyValuePairControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AppModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ProgramsCalendarVM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ControllerInfoView.xaml.cs">

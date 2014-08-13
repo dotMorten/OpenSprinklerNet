@@ -15,7 +15,7 @@ namespace OpenSprinklerApp.ViewModels
 		private async void LoadData()
 		{
 			//Open connection
-			var conn = await OpenSprinklerNet.OpenSprinklerConnection.OpenAsync("http://192.168.1.15:80", "opendoor");
+			var conn = AppModel.Current.Connection; // await OpenSprinklerNet.OpenSprinklerConnection.OpenAsync("http://192.168.1.15:80", "opendoor");
 			//Get controller metadata
 			ControllerInfo controllerInfo = await conn.GetControllerInfoAsync();
 
@@ -25,7 +25,7 @@ namespace OpenSprinklerApp.ViewModels
 			OnPropertyChanged("Programs");
 		}
 
-		public OpenSprinklerNet.Program[] Programs { get; private set; }
+		public IEnumerable<OpenSprinklerNet.Program> Programs { get; private set; }
 
 
 		private bool m_IsSequential;

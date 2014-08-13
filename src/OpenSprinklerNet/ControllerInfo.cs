@@ -14,13 +14,14 @@
 // limitations under the License.
 //
 
+using System;
 using System.Runtime.Serialization;
 
 namespace OpenSprinklerNet
 {
 	[DataContract]
 
-	public sealed class ControllerInfo
+	public class ControllerInfo
 	{
 		// Endpoint: jo
 		//{"fwv":207,"tz":16,"ntp":0,"dhcp":1,"ip1":192,"ip2":168,"ip3":1,"ip4":22,
@@ -32,13 +33,13 @@ namespace OpenSprinklerNet
 		/// Firmware version
 		/// </summary>
 		[DataMember(Name = "fwv")]
-		public int FirmwareVersion { get; private set; }
+		public int FirmwareVersion { get; protected set; }
 
 		/// <summary>
 		/// number of extension boards (up to 3) 
 		/// </summary>
 		[DataMember(Name = "ext")]
-		public int NumberOfExtensionBoards { get; private set; }
+		public int NumberOfExtensionBoards { get; protected set; }
 		/// <summary>
 		/// Use DHCP
 		/// </summary>
@@ -61,7 +62,7 @@ namespace OpenSprinklerNet
 			}
 		}
 		[DataMember(Name = "hp0")]
-		public int HostPort { get; private set; }
+		public int HostPort { get; protected set; }
 
 		[DataMember(Name = "ntp1")]
 		private int _Ntp1 { get; set; }
@@ -83,60 +84,70 @@ namespace OpenSprinklerNet
 		//time zone: (floating point time zone value + 12) x 4. e.g. GMT-5:00 will be (-5+12) *4=28, GMT+8:15 will be (8 ¼+12)*4 = 81 
 		[DataMember(Name = "tz")]
 		private double _TimeZoneInternal { get; set; }
-		public double TimeZone { get { return _TimeZoneInternal / 4 - 12; } }
+		public double TimeZone
+		{
+			get { return _TimeZoneInternal / 4 - 12; }
+			protected set
+			{
+				if (value < -12 || value > 12)
+					throw new ArgumentOutOfRangeException();
+				_TimeZoneInternal = 4 * value + 48;
+			}
+		}
 
 		/// <summary>
 		/// Whether to user network time sync
 		/// </summary>
 		[DataMember(Name = "ntp")]
-		public Status NtpSync { get; private set; }
+		public Status NtpSync { get; protected set; }
+
 		/// <summary>
 		/// Station delay time (in seconds). must be between 0 and 240.
 		/// e.g. 15 means a 15 seconds delay between two consecutive stations. 
 		/// </summary>
 		[DataMember(Name = "sdt")]
-		public int StationDelayTime { get; private set; }
+		public int StationDelayTime { get; protected set; }
 		/// <summary>
 		/// Master station index (0 means no master station, 1 means station 1 is the master station, and so on) 
 		/// </summary>
 		[DataMember(Name = "mas")]
-		public int MasterStationIndex { get; private set; }
+		public int MasterStationIndex { get; protected set; }
 		/// <summary>
 		/// master on delay time (in seconds). Must be between 0 and 60. 
 		/// e.g. 5 means the master station will turn on 5 seconds after a station opens. 
-		/// </summary>
+		
 		[DataMember(Name = "mton")]
-		public int MasterOnDelayTime { get; private set; }
+		public int MasterOnDelayTime { get; protected set; }
 		/// <summary>
 		///  master off delay time (in seconds). Must be between -60 and +60. 
 		///  e.g. -5 means the master station will turn off 5 seconds before a station closes. 
 		/// </summary>
 		[DataMember(Name = "mtof")]
-		public int MasterOffDelayTime { get; private set; }
+		public int MasterOffDelayTime { get; protected set; }
 		/// <summary>
 		/// Use rain sensor 
 		/// </summary>
 		[DataMember(Name = "urs")]
-		public Status UseRainSensor { get; private set; }
+		public Status UseRainSensor { get; protected set; }
 		/// <summary>
 		/// Rain sensor type
 		/// </summary>
 		[DataMember(Name = "rso")]
-		public bool RainSensorNormallyOpen { get; private set; }
+		public bool RainSensorNormallyOpen { get; protected set; }
 		/// <summary>
 		/// Water level in percentage (from 0 to 250). e.g. 150 means water time will increase to 150%. 
 		/// </summary>
 		[DataMember(Name = "wl")]
-		public int WaterLevel { get; private set; }
+		public int WaterLevel { get; protected set; }
 		/// <summary>
 		/// Ignore password
 		/// </summary>
 		[DataMember(Name = "ipos")]
-		public Status IgnorePassword { get; private set; }
+		public Status IgnorePassword { get; protected set; }
 		/// <summary>
 		/// Use sequential mode
 		/// </summary>
 		[DataMember(Name = "seq")]
-		public Status SequentialMode { get; private set; }
+		public Status SequentialMode { get; protected set; }
 	}
 }

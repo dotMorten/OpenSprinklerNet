@@ -16,6 +16,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace OpenSprinklerNet
@@ -32,7 +34,11 @@ namespace OpenSprinklerNet
 		//		[1,255,1,270,480,1439,480,64],
 		//		[1,255,1,270,600,1439,720,128]
 		//	]}
-
+		[OnSerializing]
+		private void OnSerializing(StreamingContext context)
+		{
+			_Data = (from p in Programs select p.GetData()).ToArray();
+		}
 		[OnDeserialized]
 		private void OnDeserialized(StreamingContext context)
 		{
@@ -43,28 +49,29 @@ namespace OpenSprinklerNet
 				{
 					programs.Add(new Program(item));
 				}
-				Programs = programs.ToArray();
+				Programs = new ReadOnlyCollection<Program>(programs);
 			}
 		}
 
 		[DataMember(Name = "nprogs")]
 		public int Count { get; private set; }
 		[DataMember(Name = "nboards")]
-		public int BoardCoard { get; private set; }
+		public int BoardCount { get; private set; }
 		[DataMember(Name = "mnp")]
 		public int mnp { get; set; } //???
 
 		[DataMember(Name = "pd")]
 		private int[][] _Data { get; set; }
 
-		public Program[] Programs { get; private set; }
+		public IEnumerable<Program> Programs { get; protected set; }
 	}
 
 	public class Program
 	{
-		byte[] m_data;
+		int[] m_data;
 		internal Program(int[] data)
 		{
+			m_data = data;
 			// 0: enabled/disabled
 			// 1+2: days
 			// 3: start (seconds)
@@ -120,6 +127,17 @@ namespace OpenSprinklerNet
 				}
 			}
 			Stations = stations.ToArray();
+		}
+		public int[] GetData() 
+		{
+			m_data[0] = Enabled ? 1 : 0;
+			//1+2: todo
+			m_data[3] = (int)Start.TotalMinutes;
+			m_data[4] = (int)End.TotalMinutes;
+			m_data[5] = (int)Interval.TotalSeconds;
+			m_data[6] = (int)Duration.TotalSeconds;
+			//todo...
+			return m_data; 
 		}
 		public int? EveryNDays { get; set; } //between 2 and 128
 		public bool Enabled { get; set; }

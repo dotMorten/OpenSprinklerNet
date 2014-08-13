@@ -35,7 +35,7 @@ namespace OpenSprinklerApp
 			try
 			{
 				//Open connection
-				var conn = await OpenSprinklerNet.OpenSprinklerConnection.OpenAsync("http://192.168.1.15:80", "opendoor");
+				var conn = OpenSprinklerApp.ViewModels.AppModel.Current.Connection; // await OpenSprinklerNet.OpenSprinklerConnection.OpenAsync("http://192.168.1.15:80", "opendoor");
 				//Get controller metadata
 				ControllerInfo controllerInfo = await conn.GetControllerInfoAsync();
 				controllerInfoView.DataContext = controllerInfo;

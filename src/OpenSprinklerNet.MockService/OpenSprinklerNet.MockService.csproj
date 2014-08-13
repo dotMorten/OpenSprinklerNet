@@ -35,6 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\OpenSprinklerNet\OpenSprinklerNet.csproj">
+      <Project>{9eac58f7-eafc-49d3-b5e8-aa8f407d4019}</Project>
+      <Name>OpenSprinklerNet</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="Windows Phone, Version=8.1" />
@@ -42,6 +46,7 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockControllerInfo.cs" />
     <Compile Include="MockHttpFilter.cs" />
     <Compile Include="MockOpenSprinklerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

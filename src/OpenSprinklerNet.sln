@@ -5,8 +5,7 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenSprinklerApp", "OpenSprinklerApp", "{6CED90C2-5CB5-43FD-A855-021ED0DD5D3B}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OpenSprinklerApp.Shared", "OpenSprinklerApp\OpenSprinklerApp.Sha
-red\OpenSprinklerApp.Shared.shproj", "{7C3A66A1-9ED7-4B51-A10B-4BF9697FF7C4}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OpenSprinklerApp.Shared", "OpenSprinklerApp\OpenSprinklerApp.Shared\OpenSprinklerApp.Shared.shproj", "{7C3A66A1-9ED7-4B51-A10B-4BF9697FF7C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSprinklerApp.Windows", "OpenSprinklerApp\OpenSprinklerApp.Windows\OpenSprinklerApp.Windows.csproj", "{A1B482E0-1582-4939-986E-AF6BF42CFCC8}"
 EndProject

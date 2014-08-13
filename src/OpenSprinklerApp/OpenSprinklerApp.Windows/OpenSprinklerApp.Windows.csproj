@@ -126,6 +126,10 @@
       <Project>{9eac58f7-eafc-49d3-b5e8-aa8f407d4019}</Project>
       <Name>OpenSprinklerNet</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\OpenSprinklerNet.MockService\OpenSprinklerNet.MockService.csproj">
+      <Project>{b0fbaec9-4905-429d-9e07-b8eecba4ae70}</Project>
+      <Name>OpenSprinklerNet.MockService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ProgramsCalendarPage.xaml">
