@@ -27,7 +27,7 @@ namespace OpenSprinklerApp
         public MainPage()
         {
             this.InitializeComponent();
-			Test();
+			//Test();
         }
 
 		private async void Test()
@@ -38,7 +38,7 @@ namespace OpenSprinklerApp
 				var conn = OpenSprinklerApp.ViewModels.AppModel.Current.Connection; // await OpenSprinklerNet.OpenSprinklerConnection.OpenAsync("http://192.168.1.15:80", "opendoor");
 				//Get controller metadata
 				ControllerInfo controllerInfo = await conn.GetControllerInfoAsync();
-				controllerInfoView.DataContext = controllerInfo;
+				//controllerInfoView.DataContext = controllerInfo;
 				//Get current settings
 				ControllerSettingsInfo settings = await conn.GetControllerSettingsAsync();
 				//Get all programs
@@ -68,6 +68,11 @@ namespace OpenSprinklerApp
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
 			Frame.Navigate(typeof(Views.ProgramsCalendarPage));
+		}
+
+		private void ButtonController_Click(object sender, RoutedEventArgs e)
+		{
+			Frame.Navigate(typeof(Views.ControllerInfoPage));
 		}
     }
 }

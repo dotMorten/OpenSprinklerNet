@@ -8,11 +8,26 @@ namespace OpenSprinklerApp.ViewModels
     {
 		private AppModel()
 		{
-#if DEBUG
-			m_Connection = new OpenSprinklerNet.OpenSprinklerConnection("http://1.1.1.1", "opendoor", new OpenSprinklerNet.MockService.MockOpenSprinklerService("1.1.1.1", "opendoor"));
-#else
-			m_Connection = new OpenSprinklerNet.OpenSprinklerConnection("http://192.168.1.15:80", "opendoor");
+#if !DEBUG
+			if (IsDesignTime)
+			{
 #endif
+				m_Connection = new OpenSprinklerNet.OpenSprinklerConnection("http://1.1.1.1", "opendoor", new OpenSprinklerNet.MockService.MockOpenSprinklerService("1.1.1.1", "opendoor"));
+#if !DEBUG
+			}
+			else
+			{
+				m_Connection = new OpenSprinklerNet.OpenSprinklerConnection("http://192.168.1.15:80", "opendoor");
+			}
+#endif
+		}
+
+		protected bool IsDesignTime
+		{
+			get
+			{
+				return Windows.ApplicationModel.DesignMode.DesignModeEnabled;
+			}
 		}
 
 		private static AppModel s_Current;

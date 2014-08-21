@@ -12,8 +12,11 @@ namespace OpenSprinklerNet.MockService
 	{
 		private MockControllerInfo controllerInfo;
 		private ProgramDetailsInfo programs;
+		private StationStatusInfo statuses;
+		private StationInfo statusInfo;
 		private string m_hostname;
 		private string m_password;
+
 		public MockOpenSprinklerService(string hostname, string password)
 			: base(null)
 		{
@@ -24,6 +27,10 @@ namespace OpenSprinklerNet.MockService
 			programs = CreateFromJson<ProgramDetailsInfo>("{\"nprogs\":5,\"nboards\":1,\"mnp\":53,\"pd\":[[1,255,1,270,360,1439,600,8],[1,255,1,270,480,1439,600,16],[1,255,1,270,360,1439,480,32],[1,255,1,270,480,1439,480,64],[1,127,1,270,600,1439,720,128]]}");
 			var progs = programs.Programs as IList<Program>;
 			progs[2].Duration = TimeSpan.FromMinutes(30);
+
+
+			statuses = CreateFromJson<StationStatusInfo>("{\"sn\":[0,0,0,1,0,1,0,0],\"nstations\":8}");
+			statusInfo = CreateFromJson<StationInfo>("{\"snames\":[\"Raised beds\",\"Planters S\",\"Planters N\",\"Backyard lawn E\",\"Backyard lawn W\",\"Frontyard lawn\",\"Sidewalk lawn\",\"Planters E\"],\"masop\":[255],\"ignore_rain\":[128],\"maxlen\":16}");
 		}
 
 		private static T CreateFromJson<T>(string str)
@@ -44,11 +51,15 @@ namespace OpenSprinklerNet.MockService
 			switch(segments[1])
 			{
 				case "jo":
-					return GetJo(request);
+					return ResponseFromObject(controllerInfo);
 				case "jc":
 					return GetJc(request);
 				case "jp":
-					return GetJp(request);
+					return ResponseFromObject(programs); //programs
+				case "js":
+					return ResponseFromObject(statuses);
+				case "jn":
+					return ResponseFromObject(statusInfo);
 				default:
 					return Get404();
 			}
@@ -63,15 +74,6 @@ namespace OpenSprinklerNet.MockService
 			return ResponseFromString("{\"devt\":1407409574,\"nbrd\":1,\"en\":1,\"rd\":0,\"rs\":1,\"mm\":0,\"rdst\":0,\"loc\":\"Redlands,CA\",\"sbits\":[0,0],\"ps\":[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],\"lrun\":[2,99,2,1407408388]}");
 		}
 
-		private Windows.Foundation.IAsyncOperationWithProgress<HttpResponseMessage, HttpProgress> GetJo(HttpRequestMessage request)
-		{
-			return ResponseFromObject(controllerInfo);
-		}
-		private Windows.Foundation.IAsyncOperationWithProgress<HttpResponseMessage, HttpProgress> GetJp(HttpRequestMessage request)
-		{
-			return ResponseFromObject(programs);
-		}
-
 		private static Windows.Foundation.IAsyncOperationWithProgress<HttpResponseMessage, HttpProgress> Get404()
 		{
 			return Operation<HttpResponseMessage>.FromResult(new HttpResponseMessage(HttpStatusCode.NotFound)
@@ -79,6 +81,7 @@ namespace OpenSprinklerNet.MockService
 				Content = new HttpStringContent("NOT FOUND")
 			});
 		}
+
 		private static Windows.Foundation.IAsyncOperationWithProgress<HttpResponseMessage, HttpProgress> GetAccessDenied()
 		{
 			return Operation<HttpResponseMessage>.FromResult(new HttpResponseMessage(HttpStatusCode.Unauthorized)

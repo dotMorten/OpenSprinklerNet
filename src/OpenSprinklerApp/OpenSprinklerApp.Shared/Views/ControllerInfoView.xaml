@@ -1,16 +1,16 @@
 ﻿<UserControl
-    x:Class="OpenSprinklerApp.ControllerInfoView"
+    x:Class="OpenSprinklerApp.Views.ControllerInfoView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:OpenSprinklerApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	Background="Red"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+	mc:Ignorable="d">
+	<d:Page.DataContext>
+		<vm:ControllerInfoVM xmlns:vm="using:OpenSprinklerApp.ViewModels" />
+	</d:Page.DataContext>
 
-	<Grid Background="{Binding Background, Source={RelativeSource Mode=TemplatedParent}}">
+	<Grid d:DataContext="{Binding ControllerInfo}">
 		<StackPanel>
 			<local:KeyValuePairControl Header="Firmware version: " Content="{Binding FirmwareVersion}" />
 			<local:KeyValuePairControl Header="Number of Extension Boards:" Content="{Binding NumberOfExtensionBoards}" />

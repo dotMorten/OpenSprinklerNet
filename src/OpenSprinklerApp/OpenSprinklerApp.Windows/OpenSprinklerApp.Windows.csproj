@@ -103,6 +103,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Views\ControllerInfoPage.xaml.cs">
+      <DependentUpon>ControllerInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProgramsCalendarPage.xaml.cs">
       <DependentUpon>ProgramsCalendarPage.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\ControllerInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\ProgramsCalendarPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

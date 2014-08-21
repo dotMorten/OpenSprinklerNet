@@ -1,5 +1,6 @@
 ﻿using OpenSprinklerNet;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,22 +13,22 @@ namespace OpenSprinklerApp.ViewModels
 		{
 			LoadData();
 		}
+
 		private async void LoadData()
 		{
 			//Open connection
-			var conn = AppModel.Current.Connection; // await OpenSprinklerNet.OpenSprinklerConnection.OpenAsync("http://192.168.1.15:80", "opendoor");
+			var conn = AppModel.Current.Connection; 
 			//Get controller metadata
 			ControllerInfo controllerInfo = await conn.GetControllerInfoAsync();
 
 			ProgramDetailsInfo programs = await conn.GetProgamDetailsAsync();
-			Programs = programs.Programs;
+			Programs = new List<OpenSprinklerNet.Program>(programs.Programs); //Unfortunately I have to do this because stupid WinRT type system can't do proper type conversion
 			IsSequential = controllerInfo.SequentialMode == Status.On;
 			OnPropertyChanged("Programs");
 		}
 
-		public IEnumerable<OpenSprinklerNet.Program> Programs { get; private set; }
-
-
+		public List<OpenSprinklerNet.Program> Programs { get; set; }
+		
 		private bool m_IsSequential;
 
 		public bool IsSequential
