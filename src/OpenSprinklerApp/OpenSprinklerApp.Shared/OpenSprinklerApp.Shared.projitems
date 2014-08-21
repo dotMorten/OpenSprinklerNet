@@ -23,17 +23,28 @@
       <DependentUpon>CalendarItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\KeyValuePairControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\TitleBasePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AppModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsVM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainPageVM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ControllerInfoVM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ProgramsCalendarVM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ControllerInfoPage.xaml.cs">
+      <DependentUpon>ControllerInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\ControllerInfoView.xaml.cs">
       <DependentUpon>ControllerInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -45,7 +56,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Themes\Generic.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Views\ControllerInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -54,6 +65,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

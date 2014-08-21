@@ -17,7 +17,7 @@ namespace OpenSprinklerApp.ViewModels
 			}
 			else
 			{
-				m_Connection = new OpenSprinklerNet.OpenSprinklerConnection("http://192.168.1.15:80", "opendoor");
+				m_Connection = new OpenSprinklerNet.OpenSprinklerConnection("http://192.168.1.5:80", "opendoor", new Windows.Web.Http.Filters.HttpBaseProtocolFilter());
 			}
 #endif
 		}

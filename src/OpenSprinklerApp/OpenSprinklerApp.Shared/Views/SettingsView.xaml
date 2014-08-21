@@ -1,0 +1,29 @@
+﻿<UserControl
+    x:Class="OpenSprinklerApp.Views.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OpenSprinklerApp.Views"
+	xmlns:vm="using:OpenSprinklerApp.ViewModels"
+	xmlns:ctrls="using:OpenSprinklerApp.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+	<d:Page.DataContext>
+		<vm:SettingsVM xmlns:vm="using:OpenSprinklerApp.ViewModels" />
+	</d:Page.DataContext>
+
+	<Grid>
+		<Grid d:DataContext="{Binding SettingsInfo}">
+			<StackPanel>
+				<ctrls:KeyValuePairControl Header="Firmware version: " Content="{Binding Location}" />
+				<ctrls:KeyValuePairControl Header="Manual mode:" Content="{Binding ManualMode}" />
+				<ctrls:KeyValuePairControl Header="Mode:" Content="{Binding Mode}" />
+				<ctrls:KeyValuePairControl Header="Number of boards:" Content="{Binding NumberOfBoards}" />
+				<ctrls:KeyValuePairControl Header="Date:" Content="{Binding Date}" />
+
+			</StackPanel>
+		</Grid>
+	</Grid>
+</UserControl>

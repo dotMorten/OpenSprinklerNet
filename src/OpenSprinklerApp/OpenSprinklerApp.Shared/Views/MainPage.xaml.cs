@@ -74,5 +74,10 @@ namespace OpenSprinklerApp
 		{
 			Frame.Navigate(typeof(Views.ControllerInfoPage));
 		}
+
+		private void ButtonSettings_Click(object sender, RoutedEventArgs e)
+		{
+			Frame.Navigate(typeof(Views.SettingsPage));
+		}
     }
 }

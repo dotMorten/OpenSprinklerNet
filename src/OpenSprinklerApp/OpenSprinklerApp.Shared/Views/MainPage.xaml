@@ -14,23 +14,38 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 		<Grid Background="#EAEAEA">
-			<Grid.ColumnDefinitions>
+			<!--<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
+			</Grid.ColumnDefinitions>-->
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			
+			<ItemsControl Grid.Row="1" Margin="20">
+				<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapGrid Orientation="Horizontal" />
+				</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<Button Content="Controller..." Click="ButtonController_Click"
+						HorizontalAlignment="Right" Height="120" Width="120"
+						Background="White" />
 
-			<StackPanel Margin="20">
-			<Button Content="Controller..." Click="ButtonController_Click"
-					HorizontalAlignment="Right" Height="120" Width="120"
-					Background="White" />
+				<Button Content="Settings..." Click="ButtonSettings_Click"
+						HorizontalAlignment="Right" Height="120" Width="120"
+						Background="White" />
 
-			<Button Content="Programs..." Click="Button_Click"
-					HorizontalAlignment="Right" Height="120" Width="120"
-					Background="White" Margin="0,20,0,0" />
-				
+				<Button Content="Programs..." Click="Button_Click"
+						HorizontalAlignment="Right" Height="120" Width="120"
+						Background="White" />
+			</ItemsControl>
+			<StackPanel Margin="20" Grid.Row="1">
+
 			</StackPanel>
 			
-			<Grid Grid.Column="1" Margin="20">
+			<Grid Grid.Row="0" Margin="20">
 				<ItemsControl ItemsSource="{Binding Stations}">
 					<ItemsControl.ItemsPanel>
 						<ItemsPanelTemplate>
